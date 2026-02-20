@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>QuranConnect</title>
   
-  <!-- PWA LINKS WITH PERMANENT EMBEDDED ICONS -->
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#10b981">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%2310b981'/%3E%3Cpath d='M150 210 C190 180 230 190 256 210 C282 190 322 180 362 210 V360 C322 330 282 340 256 360 C230 340 190 330 150 360 Z' fill='none' stroke='%23ffffff' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M256 210 V360' fill='none' stroke='%23ffffff' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%2310b981'/%3E%3Cpath d='M150 210 C190 180 230 190 256 210 C282 190 322 180 362 210 V360 C322 330 282 340 256 360 C230 340 190 330 150 360 Z' fill='none' stroke='%23ffffff' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M256 210 V360' fill='none' stroke='%23ffffff' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   
-  <!-- React and Babel Scripts -->
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -45,15 +43,12 @@
     .font-arabic { font-family: 'Amiri Quran', serif; line-height: 2.2; }
 
     .app-container { max-width: 800px; margin: 0 auto; padding: 20px; padding-top: 30px; }
-    
     .flex-row { display: flex; align-items: center; }
     .flex-between { display: flex; justify-content: space-between; align-items: center; }
     .flex-col { display: flex; flex-direction: column; }
 
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes spin { 100% { transform: rotate(360deg); } }
-    
     .fade-in { animation: fadeInUp 0.6s ease forwards; }
     
     .nav-bar { margin-bottom: 40px; }
@@ -91,8 +86,7 @@
     .card {
       background: var(--card-bg); border-radius: 20px; padding: 20px;
       border: 1px solid var(--border); box-shadow: var(--shadow);
-      transition: all 0.3s ease; cursor: pointer; text-align: left;
-      appearance: none; -webkit-appearance: none; display: block; width: 100%;
+      transition: all 0.3s ease; cursor: pointer; text-align: left; display: block; width: 100%;
     }
     .card:hover, .card:active { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: #6ee7b7; }
     
@@ -125,41 +119,33 @@
     .ayah-header { margin-bottom: 24px; }
     .ayah-num { width: 40px; height: 40px; border-radius: 50%; background: var(--primary-light); color: var(--primary-dark); font-weight: bold; display: flex; justify-content: center; align-items: center;}
     .share-btn { background: transparent; border: none; color: #94a3b8; cursor: pointer; padding: 8px; border-radius: 50%; transition: 0.2s;}
-    .share-btn:hover { background: #f1f5f9; color: var(--primary); }
     
     .ayah-arabic { font-size: 32px; color: #022c22; text-align: right; margin-bottom: 24px; direction: rtl; }
     .ayah-english { font-size: 18px; color: #334155; line-height: 1.7; }
 
-    .loader-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 0; }
-    .spinner { width: 40px; height: 40px; border: 4px solid var(--primary-light); border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 16px; }
-
-    .notif-banner {
-      position: fixed; top: 16px; left: 16px; right: 16px; z-index: 999;
-      background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
-      padding: 20px; border-radius: 24px; border: 1px solid rgba(16,185,129,0.3);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.1); animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      max-width: 600px; margin: 0 auto;
+    /* Sync Screen Styles */
+    .sync-screen {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; 
+      height: 100vh; background: var(--bg-gradient); text-align: center; padding: 20px;
     }
+    .spinner { width: 50px; height: 50px; border: 4px solid var(--primary-light); border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
   </style>
 </head>
 <body>
 
-  <!-- ROOT DIV WITH OFFLINE FALLBACK UI -->
+  <!-- ROOT DIV -->
   <div id="root">
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: linear-gradient(135deg, #f8fafc 0%, #ecfdf5 50%, #f0f9ff 100%); font-family: 'Inter', sans-serif;">
-      <div style="width: 50px; height: 50px; border: 4px solid #d1fae5; border-top: 4px solid #10b981; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-      <h2 style="color: #047857; margin-top: 24px; font-weight: 800; font-size: 22px;">QuranConnect</h2>
-      <p style="color: #64748b; margin-top: 8px; font-size: 14px; font-weight: 500;">Loading offline engine...</p>
+    <div class="sync-screen">
+      <div class="spinner"></div>
+      <h2 style="color: #047857; font-weight: 800; font-size: 24px; font-family: 'Inter', sans-serif;">QuranConnect</h2>
+      <p style="color: #64748b; margin-top: 8px; font-family: 'Inter', sans-serif;">Starting engine...</p>
     </div>
   </div>
 
-  <!-- Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('Service Worker Registered'))
-          .catch(err => console.log('Service Worker Error', err));
+        navigator.serviceWorker.register('./sw.js');
       });
     }
   </script>
@@ -171,140 +157,169 @@
       Book: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>,
       Search: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>,
       Chevron: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>,
-      Bell: () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>,
-      X: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>,
       Share: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>,
       Sparkles: () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
     };
 
-    const CACHE_KEY = 'quran_vanilla_v2_';
-    const fetchWithCache = async (key, url) => {
-      try {
-        const cached = localStorage.getItem(CACHE_KEY + key);
-        if (cached) return JSON.parse(cached);
-      } catch (e) {}
-
-      const res = await fetch(url);
-      const data = await res.json();
-      try { localStorage.setItem(CACHE_KEY + key, JSON.stringify(data)); } catch (e) {}
-      return data;
-    };
+    const DAILY_AYAHS = ['2:255', '2:286', '3:190', '13:28', '20:46', '24:35', '94:5', '94:6', '40:60', '3:8'];
 
     const copyToClipboard = (text) => {
       const textArea = document.createElement("textarea");
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.select();
+      textArea.value = text; document.body.appendChild(textArea); textArea.select();
       try { document.execCommand('copy'); alert("Verse Copied!"); } catch (err) {}
       document.body.removeChild(textArea);
     };
-
-    const DAILY_AYAHS = ['2:255', '2:286', '3:190', '13:28', '20:46', '24:35', '94:5', '94:6'];
 
     function App() {
       const [view, setView] = useState('home');
       const [surahs, setSurahs] = useState([]);
       const [currentSurah, setCurrentSurah] = useState(null);
       const [surahData, setSurahData] = useState(null);
-      const [loading, setLoading] = useState(true);
       const [searchQuery, setSearchQuery] = useState('');
       
-      const [dailyAyah, setDailyAyah] = useState(null);
-      const [showNotif, setShowNotif] = useState(false);
+      // Sync States
+      const [isSynced, setIsSynced] = useState(false);
+      const [syncMsg, setSyncMsg] = useState('Initializing...');
 
       useEffect(() => {
-        loadSurahList();
-        loadDailyAyah();
+        checkAndSyncOfflineData();
+        triggerNativeNotification();
       }, []);
 
-      const loadSurahList = async () => {
-        setLoading(true);
-        const data = await fetchWithCache('surahs', 'https://api.alquran.cloud/v1/surah');
-        setSurahs(data.data);
-        setLoading(false);
-      };
-
-      const loadDailyAyah = async () => {
-        const today = new Date().toISOString().split('T')[0];
-        const day = new Date().getDate();
-        const ref = DAILY_AYAHS[day % DAILY_AYAHS.length];
+      const checkAndSyncOfflineData = async () => {
+        const synced = localStorage.getItem('quran_full_sync_v1');
         
-        try {
-          const data = await fetchWithCache('daily_'+today, `https://api.alquran.cloud/v1/ayah/${ref}/editions/quran-uthmani,en.sahih`);
-          setDailyAyah({
-            ar: data.data[0].text, en: data.data[1].text, 
-            name: data.data[0].surah.englishName, num: data.data[0].numberInSurah,
-            surah: data.data[0].surah
-          });
-          
-          if (localStorage.getItem('quran_last_notif') !== today) {
-            setTimeout(() => setShowNotif(true), 1500);
+        if (synced) {
+          await loadFromCache();
+          setIsSynced(true);
+        } else {
+          // Perform Full Offline Download
+          try {
+            const cache = await caches.open('quran-full-db-v1');
+            
+            setSyncMsg("Downloading Quran Library (1/3)...");
+            await cache.add('https://api.alquran.cloud/v1/surah');
+            
+            setSyncMsg("Downloading Arabic Database (2/3)...");
+            await cache.add('https://api.alquran.cloud/v1/quran/quran-uthmani');
+            
+            setSyncMsg("Downloading English Translation (3/3)...");
+            await cache.add('https://api.alquran.cloud/v1/quran/en.sahih');
+
+            localStorage.setItem('quran_full_sync_v1', 'true');
+            await loadFromCache();
+            setIsSynced(true);
+          } catch (e) {
+            setSyncMsg("Network Error. Please connect to WiFi to sync the app.");
           }
-        } catch(e) {}
+        }
       };
 
-      const openSurah = async (surah) => {
-        setView('surah'); setCurrentSurah(surah); setSurahData(null); setLoading(true);
+      const loadFromCache = async () => {
+        const cache = await caches.open('quran-full-db-v1');
+        const res = await cache.match('https://api.alquran.cloud/v1/surah');
+        if (res) {
+          const data = await res.json();
+          setSurahs(data.data);
+        }
+      };
+
+      // --- NATIVE OS PUSH NOTIFICATION ---
+      const triggerNativeNotification = async () => {
+        if ('Notification' in window) {
+          if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+            await Notification.requestPermission();
+          }
+          
+          if (Notification.permission === 'granted') {
+            const today = new Date().toISOString().split('T')[0];
+            const lastNotif = localStorage.getItem('native_notif_date');
+            
+            if (lastNotif !== today) {
+              const day = new Date().getDate();
+              const ref = DAILY_AYAHS[day % DAILY_AYAHS.length];
+              
+              try {
+                // Fetch daily ayah just for the notification
+                const res = await fetch(`https://api.alquran.cloud/v1/ayah/${ref}/en.sahih`);
+                const data = await res.json();
+                
+                navigator.serviceWorker.ready.then(registration => {
+                  registration.showNotification(`Daily Ayah: ${data.data.surah.englishName}`, {
+                    body: data.data.text,
+                    icon: "https://cdn-icons-png.flaticon.com/512/3073/3073998.png",
+                    badge: "https://cdn-icons-png.flaticon.com/512/3073/3073998.png",
+                    vibrate: [200, 100, 200],
+                    tag: 'daily-quran'
+                  });
+                });
+                localStorage.setItem('native_notif_date', today);
+              } catch(e) {}
+            }
+          }
+        }
+      };
+
+      const openSurah = async (surahInfo) => {
+        setView('surah'); setCurrentSurah(surahInfo); setSurahData(null);
         window.scrollTo(0, 0);
 
-        const [arRes, enRes] = await Promise.all([
-          fetchWithCache('ar_'+surah.number, `https://api.alquran.cloud/v1/surah/${surah.number}/quran-uthmani`),
-          fetchWithCache('en_'+surah.number, `https://api.alquran.cloud/v1/surah/${surah.number}/en.sahih`)
-        ]);
+        // Fetch directly from our fully downloaded offline vault!
+        const cache = await caches.open('quran-full-db-v1');
+        
+        const arRes = await cache.match('https://api.alquran.cloud/v1/quran/quran-uthmani');
+        const enRes = await cache.match('https://api.alquran.cloud/v1/quran/en.sahih');
+        
+        const arData = await arRes.json();
+        const enData = await enRes.json();
 
-        const ayahs = arRes.data.ayahs.map((a, i) => {
+        // Extract the specific Surah from the massive downloaded JSON
+        const arabicSurah = arData.data.surahs.find(s => s.number === surahInfo.number);
+        const englishSurah = enData.data.surahs.find(s => s.number === surahInfo.number);
+
+        const ayahs = arabicSurah.ayahs.map((a, i) => {
           let text = a.text;
-          if (surah.number !== 1 && surah.number !== 9 && a.numberInSurah === 1) {
+          if (surahInfo.number !== 1 && surahInfo.number !== 9 && a.numberInSurah === 1) {
              text = text.replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ", "").replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "");
           }
-          return { num: a.numberInSurah, ar: text, en: enRes.data.ayahs[i].text };
+          return { num: a.numberInSurah, ar: text, en: englishSurah.ayahs[i].text };
         });
 
-        setSurahData(ayahs); setLoading(false);
+        setSurahData(ayahs);
       };
 
       const filtered = useMemo(() => {
         return surahs.filter(s => s.englishName.toLowerCase().includes(searchQuery.toLowerCase()) || s.number.toString() === searchQuery);
       }, [surahs, searchQuery]);
 
+      // If not synced yet, show the beautiful download screen
+      if (!isSynced) {
+        return (
+          <div className="sync-screen">
+            <div className="spinner"></div>
+            <h2 style={{color: '#047857', fontWeight: '800', fontSize: '24px', fontFamily: 'Inter'}}>Syncing Offline Database</h2>
+            <p style={{color: '#64748b', marginTop: '10px', fontSize: '14px', fontWeight: 'bold'}}>{syncMsg}</p>
+            <p style={{color: '#94a3b8', marginTop: '10px', fontSize: '12px', maxWidth: '300px'}}>Please do not close the app. This only happens once to make the app work without internet forever.</p>
+          </div>
+        );
+      }
+
       return (
         <div className="app-container">
           
-          {showNotif && dailyAyah && (
-            <div className="notif-banner">
-              <div className="flex-between" style={{marginBottom: '12px'}}>
-                <div className="flex-row" style={{color: 'var(--primary-dark)', fontWeight: 'bold', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px'}}>
-                  <span style={{marginRight: '6px'}}><Icons.Bell /></span> Daily Reminder
-                </div>
-                <button onClick={() => { setShowNotif(false); localStorage.setItem('quran_last_notif', new Date().toISOString().split('T')[0]); }} style={{background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer'}}>
-                  <Icons.X />
-                </button>
-              </div>
-              <div className="font-arabic" style={{textAlign: 'right', fontSize: '24px', color: '#022c22', marginBottom: '12px', direction: 'rtl'}}>{dailyAyah.ar}</div>
-              <div style={{fontSize: '14px', color: '#475569', lineHeight: '1.6', marginBottom: '16px'}}>"{dailyAyah.en}"</div>
-              
-              <div className="flex-between">
-                <span style={{fontSize: '12px', fontWeight: 'bold', color: '#94a3b8'}}>{dailyAyah.name} ({dailyAyah.num})</span>
-                <button onClick={() => { setShowNotif(false); openSurah(dailyAyah.surah); }} style={{background: 'var(--primary-light)', color: 'var(--primary-dark)', border: 'none', padding: '6px 14px', borderRadius: '20px', fontWeight: 'bold', cursor: 'pointer', fontSize: '12px'}}>
-                  Read Surah
-                </button>
-              </div>
-            </div>
-          )}
-
           <div className="nav-bar flex-between fade-in">
             <div className="flex-row cursor-pointer" onClick={() => setView('home')}>
               <div className="logo-icon"><Icons.Book /></div>
               <div className="nav-title">Quran<span>Connect</span></div>
             </div>
-            <div className="badge-offline"><Icons.Sparkles /> Offline</div>
+            <div className="badge-offline"><Icons.Sparkles /> Offline Database</div>
           </div>
 
           {view === 'home' && (
             <div className="fade-in">
               <div className="hero">
                 <h2>Peaceful Guidance.</h2>
-                <p>Read the Holy Quran with a beautifully clean, distraction-free interface.</p>
+                <p>Read the Holy Quran completely offline.</p>
               </div>
 
               <div className="search-container">
@@ -318,35 +333,23 @@
                 />
               </div>
 
-              {loading ? (
-                <div className="loader-container">
-                  <div className="spinner"></div>
-                  <p style={{color: 'var(--primary)', fontWeight: 'bold'}}>Loading Library...</p>
-                </div>
-              ) : (
-                <div className="grid">
-                  {filtered.map(s => (
-                    <button key={s.number} className="card flex-row" onClick={() => openSurah(s)}>
-                      <div className="surah-num">{s.number}</div>
-                      <div style={{flex: 1}}>
-                        <div className="flex-between">
-                          <div className="surah-title">{s.englishName}</div>
-                          <div className="surah-arabic font-arabic">{s.name.replace('سُورَةُ ', '')}</div>
-                        </div>
-                        <div className="surah-trans">{s.englishNameTranslation}</div>
-                        <div>
-                          <span className="surah-meta">{s.revelationType} • {s.numberOfAyahs} Verses</span>
-                        </div>
+              <div className="grid">
+                {filtered.map(s => (
+                  <button key={s.number} className="card flex-row" onClick={() => openSurah(s)}>
+                    <div className="surah-num">{s.number}</div>
+                    <div style={{flex: 1}}>
+                      <div className="flex-between">
+                        <div className="surah-title">{s.englishName}</div>
+                        <div className="surah-arabic font-arabic">{s.name.replace('سُورَةُ ', '')}</div>
                       </div>
-                    </button>
-                  ))}
-                  {filtered.length === 0 && (
-                    <div style={{gridColumn: '1 / -1', textAlign: 'center', padding: '40px', color: 'var(--text-muted)'}}>
-                      No Surahs found matching "{searchQuery}"
+                      <div className="surah-trans">{s.englishNameTranslation}</div>
+                      <div>
+                        <span className="surah-meta">{s.revelationType} • {s.numberOfAyahs} Verses</span>
+                      </div>
                     </div>
-                  )}
-                </div>
-              )}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
 
@@ -363,10 +366,9 @@
                 <div className="font-arabic" style={{fontSize: '20px', color: 'var(--primary-dark)', width: '60px', textAlign: 'right'}}>{currentSurah.name.replace('سُورَةُ ', '')}</div>
               </div>
 
-              {loading ? (
-                <div className="loader-container">
-                  <div className="spinner"></div>
-                  <p style={{color: 'var(--primary)', fontWeight: 'bold'}}>Retrieving Verses...</p>
+              {!surahData ? (
+                <div style={{textAlign: 'center', padding: '60px'}}>
+                   <div className="spinner" style={{margin: '0 auto'}}></div>
                 </div>
               ) : (
                 <div>
