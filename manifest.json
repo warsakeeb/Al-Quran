@@ -8,15 +8,9 @@
   "description": "Peaceful Guidance.",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/3073/3073998.png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%2310b981'/%3E%3Cpath d='M150 210 C190 180 230 190 256 210 C282 190 322 180 362 210 V360 C322 330 282 340 256 360 C230 340 190 330 150 360 Z' fill='none' stroke='%23ffffff' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M256 210 V360' fill='none' stroke='%23ffffff' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "https://cdn-icons-png.flaticon.com/192/3073/3073998.png",
-      "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ]
