@@ -1,20 +1,25 @@
 {
   "name": "QuranConnect",
   "short_name": "Quran",
-  "start_url": ".",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ecfdf5",
   "theme_color": "#10b981",
-  "description": "Peaceful Guidance. Read the Holy Quran with a clean, distraction-free interface.",
+  "description": "Peaceful Guidance.",
   "icons": [
     {
-      "src": "logo.svg",
-      "sizes": "192x192 512x512",
-      "type": "image/svg+xml",
+      "src": "https://cdn-icons-png.flaticon.com/512/3073/3073998.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/192/3073/3073998.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
 }
-
 
 
