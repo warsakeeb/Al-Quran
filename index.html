@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>QuranConnect</title>
   
-  <!-- PWA LINKS: This is what tells the phone it's a real app! -->
-  <link rel="manifest" href="manifest.json">
+  <!-- PWA LINKS WITH RELATIVE PATHS AND LIVE ICONS -->
+  <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#10b981">
-  <link rel="icon" type="image/svg+xml" href="logo.svg">
-  <link rel="apple-touch-icon" href="logo.svg">
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3073/3073998.png">
+  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3073/3073998.png">
   
-  <!-- React and Babel -->
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -145,7 +144,7 @@
 <body>
   <div id="root"></div>
 
-  <!-- Service Worker Registration -->
+  <!-- RELATIVE PATH FOR SERVICE WORKER -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
