@@ -1,0 +1,17 @@
+{
+  "name": "QuranConnect",
+  "short_name": "Quran",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ecfdf5",
+  "theme_color": "#10b981",
+  "description": "Peaceful Guidance. Read the Holy Quran with a clean, distraction-free interface.",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
