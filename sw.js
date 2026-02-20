@@ -1,16 +1,31 @@
-const CACHE_NAME = 'quran-offline-vault-v1';
+const CACHE_NAME = 'quran-engine-v2';
 
-// Install event - takes over immediately
+// These files are essential to boot the app. We cache them IMMEDIATELY.
+const CORE_ASSETS = [
+  './',
+  './index.html',
+  './manifest.json',
+  'https://unpkg.com/react@18/umd/react.production.min.js',
+  'https://unpkg.com/react-dom@18/umd/react-dom.production.min.js',
+  'https://unpkg.com/@babel/standalone/babel.min.js',
+  'https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Inter:wght@400;500;600;700;800&display=swap'
+];
+
 self.addEventListener('install', (e) => {
   self.skipWaiting();
+  e.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(CORE_ASSETS);
+    })
+  );
 });
 
-// Activate event - cleans up old caches
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(keyList.map((key) => {
-        if (key !== CACHE_NAME) {
+        // Clear out old caches
+        if (key !== CACHE_NAME && key !== 'quran-full-db-v1') {
           return caches.delete(key);
         }
       }));
@@ -19,27 +34,20 @@ self.addEventListener('activate', (e) => {
   return self.clients.claim();
 });
 
-// Fetch event - The "Smart Vault" Logic
+// The Interceptor: Serves files even if internet is completely off
 self.addEventListener('fetch', (e) => {
-  // Ignore non-http requests
   if (!e.request.url.startsWith('http')) return;
 
   e.respondWith(
     caches.match(e.request).then((cachedResponse) => {
-      // 1. Fetch from the network in the background to keep the vault updated
-      const fetchPromise = fetch(e.request).then((networkResponse) => {
-        // Save a clone of the network response to the vault
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(e.request, networkResponse.clone());
-        });
-        return networkResponse;
-      }).catch(() => {
-        // If network fails (offline), ignore error
+      // Return cached version instantly if it exists
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      // Otherwise fetch from network
+      return fetch(e.request).catch(() => {
+        // If network fails, fail silently
       });
-
-      // 2. Return the cached response IMMEDIATELY if we have it (Instant Offline Load)
-      // If we don't have it in cache, wait for the network fetch
-      return cachedResponse || fetchPromise;
     })
   );
 });
