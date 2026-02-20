@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#ecfdf5",
   "theme_color": "#10b981",
-  "description": "Peaceful Guidance. Read the Holy Quran with a clean, distraction-free interface.",
+  "description": "Peaceful Guidance. Read the Holy Quran entirely offline.",
   "icons": [
     {
       "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%2310b981'/%3E%3Cpath d='M150 210 C190 180 230 190 256 210 C282 190 322 180 362 210 V360 C322 330 282 340 256 360 C230 340 190 330 150 360 Z' fill='none' stroke='%23ffffff' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M256 210 V360' fill='none' stroke='%23ffffff' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
