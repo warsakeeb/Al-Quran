@@ -1,0 +1,20 @@
+  <!-- Premium iOS-style Squircle Background -->
+  <rect width="512" height="512" rx="115" fill="url(#emeraldGrad)" />
+  
+  <!-- Subtle Decorative Ring -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="4" />
+  
+  <!-- Minimalist Quran/Book Icon -->
+  <g filter="url(#shadow)" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Pages -->
+    <path d="M150 210 C190 180 230 190 256 210 C282 190 322 180 362 210 V360 C322 330 282 340 256 360 C230 340 190 330 150 360 Z" stroke-width="32" />
+    <!-- Center Spine -->
+    <path d="M256 210 V360" stroke-width="32" />
+    <!-- Arabic Calligraphy Hint Lines -->
+    <path d="M190 260 H220" stroke-width="20" />
+    <path d="M292 260 H322" stroke-width="20" />
+    <path d="M200 300 H220" stroke-width="20" />
+    <!-- Divine Connection Dot -->
+    <circle cx="256" cy="130" r="22" fill="#ffffff" stroke="none" />
+  </g>
+</svg>
