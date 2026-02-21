@@ -1,6 +1,6 @@
-const CACHE_NAME = 'quran-engine-v2';
+const CACHE_NAME = 'quran-engine-v3';
 
-// These files are essential to boot the app. We cache them IMMEDIATELY.
+// Core structural files
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -24,7 +24,7 @@ self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(keyList.map((key) => {
-        // Clear out old caches
+        // Delete old engines to force updates
         if (key !== CACHE_NAME && key !== 'quran-full-db-v1') {
           return caches.delete(key);
         }
@@ -34,19 +34,19 @@ self.addEventListener('activate', (e) => {
   return self.clients.claim();
 });
 
-// The Interceptor: Serves files even if internet is completely off
+// Smart Interceptor
 self.addEventListener('fetch', (e) => {
   if (!e.request.url.startsWith('http')) return;
 
   e.respondWith(
     caches.match(e.request).then((cachedResponse) => {
-      // Return cached version instantly if it exists
+      // 1. Give the cached file immediately if we have it
       if (cachedResponse) {
         return cachedResponse;
       }
-      // Otherwise fetch from network
+      // 2. Otherwise safely fetch from internet
       return fetch(e.request).catch(() => {
-        // If network fails, fail silently
+         // Silently fail if offline so the app can handle it visually
       });
     })
   );
